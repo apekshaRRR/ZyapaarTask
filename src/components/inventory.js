@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
-import React from 'react';
+// src/components/Inventory.js
 
-import inventoryService from "../services/inventoryService";
+import React, { useEffect, useState } from 'react';
+import inventoryService from '../services/inventoryService';
+import '../style/Inventory.css';
 
-function Inventory (){
+function Inventory() {
     const [items, setItems] = useState([]);
     const [newItem, setNewItem] = useState({ name: '', category: '', quantity: 0 });
     const [editingItem, setEditingItem] = useState(null);
@@ -11,6 +12,7 @@ function Inventory (){
     useEffect(() => {
         fetchItems();
     }, []);
+
     const fetchItems = () => {
         inventoryService.getAllItems()
             .then(response => {
@@ -20,6 +22,7 @@ function Inventory (){
                 console.error('Error fetching items', error);
             });
     };
+
     const handleCreateItem = () => {
         inventoryService.createItem(newItem)
             .then(() => {
@@ -30,6 +33,7 @@ function Inventory (){
                 console.error('Error creating item', error);
             });
     };
+
     const handleUpdateItem = () => {
         if (!editingItem) return;
         inventoryService.updateItem(editingItem.id, editingItem)
@@ -59,9 +63,11 @@ function Inventory (){
     const cancelEdit = () => {
         setEditingItem(null);
     };
-    return(
-        <>
-           <div>
+    const goToPage = () => {
+        window.location.href = "/";
+    };
+    return (
+        <div className="container">
             <h2>Inventory Management</h2>
             <div>
                 <h3>Add New Item</h3>
@@ -123,7 +129,7 @@ function Inventory (){
                                 />
                                 : item.quantity}
                             </td>
-                            <td>
+                            <td className="actions">
                                 {editingItem && editingItem.id === item.id ?
                                     <React.Fragment>
                                         <button onClick={handleUpdateItem}>Save</button>
@@ -137,11 +143,14 @@ function Inventory (){
                                 }
                             </td>
                         </tr>
+                        
                     ))}
                 </tbody>
+                <button className="go-to-inventory" onClick={goToPage}>Go Back</button>
+
             </table>
         </div>
-        </>
-    )
+    );
 }
+
 export default Inventory;

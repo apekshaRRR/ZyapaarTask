@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { uploadImage } from '../services/imageService';
+import '../style/ImageUpload.css';
 
 function ImageUpload() {
     const [selectedFile, setSelectedFile] = useState(null);
@@ -47,7 +48,7 @@ function ImageUpload() {
             </button>
             {uploadSuccess && <p className="message">Image uploaded successfully!</p>}
             {uploadError && <p className="error-message">{uploadError}</p>}
-            <button onClick={goToPage}>Go to Inventory List Page</button>
+            <button className="go-to-inventory" onClick={goToPage}>Go to Inventory List Page</button>
         </div>
     );
 }
