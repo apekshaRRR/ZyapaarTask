@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 
-const API_URL = '/api/images';
+const API_URL = 'http://localhost:8081/api/images';
 
 const uploadImage = (file) => {
     let formData = new FormData();

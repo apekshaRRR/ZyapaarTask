@@ -1,7 +1,6 @@
 // src/components/ImageUpload.js
 
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { uploadImage } from '../services/imageService';
 
 function ImageUpload() {
@@ -35,6 +34,10 @@ function ImageUpload() {
             });
     };
 
+    const goToPage = () => {
+        window.location.href = "/inventory";
+    };
+
     return (
         <div className="container">
             <h2>Image Upload</h2>
@@ -42,8 +45,9 @@ function ImageUpload() {
             <button onClick={handleUpload} disabled={uploading}>
                 {uploading ? 'Uploading...' : 'Upload'}
             </button>
-            {uploadSuccess && <p>Image uploaded successfully!</p>}
-            {uploadError && <p style={{ color: 'red' }}>{uploadError}</p>}
+            {uploadSuccess && <p className="message">Image uploaded successfully!</p>}
+            {uploadError && <p className="error-message">{uploadError}</p>}
+            <button onClick={goToPage}>Go to Inventory List Page</button>
         </div>
     );
 }
