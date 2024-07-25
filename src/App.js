@@ -9,7 +9,7 @@ function App() {
 
     useEffect(() => {
         axios.get(`${API_URL}/employees`).then(response => setEmployees(response.data));
-        axios.get(`${API_URL}/vendors`).then(response => setEmployees(response.data));
+        axios.get(`${API_URL}/vendors`).then(response => setVendors(response.data));
 
     }, []);
 
@@ -37,8 +37,10 @@ function App() {
         };
         axios.post(`${API_URL}/vendor`,vendor).then(response => {
             setVendors([...vendors, response.data]);
+           
         });
     };
+
 
     const handleSendEmail = (e) => {
         e.preventDefault();
